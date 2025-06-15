@@ -250,129 +250,13 @@ cd <项目目录>
 npm i
 ```
 
-3. **创建数据库表**
-   执行以下 SQL 脚本创建数据库表：
+3. **创建数据库表**&#x20;
 
-```sql
--- 创建用户表
-CREATE TABLE IF NOT EXISTS users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL,
-    real_name VARCHAR(255),
-    phone VARCHAR(20),
-    user_type ENUM('NORMAL', 'VOLUNTEER', 'ADMIN') NOT NULL DEFAULT 'NORMAL',
-    avatar VARCHAR(255) DEFAULT 'default_avatar.png',
-    upload_count INT DEFAULT 0,
-    banned_files INT DEFAULT 0,
-    status ENUM('NORMAL', 'BANNED') NOT NULL DEFAULT 'NORMAL',
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    last_login_time TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);
+   不需要我们再次创建，数据库已经部署上服务器了。
 
--- 创建文件表
-CREATE TABLE IF NOT EXISTS files (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    file_uuid VARCHAR(255) NOT NULL,
-    file_name VARCHAR(255) NOT NULL,
-    file_type VARCHAR(50) NOT NULL,
-    file_size BIGINT NOT NULL,
-    file_ext VARCHAR(10) NOT NULL,
-    title VARCHAR(255) NOT NULL,
-    description TEXT,
-    cover_image VARCHAR(255),
-    category_id INT NOT NULL,
-    user_id INT NOT NULL,
-    audit_status INT NOT NULL DEFAULT 0,
-    audit_user_id INT,
-    audit_time TIMESTAMP,
-    audit_remark TEXT,
-    view_count INT DEFAULT 0,
-    download_count INT DEFAULT 0,
-    like_count INT DEFAULT 0,
-    status INT DEFAULT 1,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(id),
-    FOREIGN KEY (category_id) REFERENCES categories(id)
-);
 
--- 创建分类表
-CREATE TABLE IF NOT EXISTS categories (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL UNIQUE,
-    description TEXT,
-    parent_id INT,
-    sort_order INT NOT NULL,
-    status INT DEFAULT 1,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (parent_id) REFERENCES categories(id)
-);
 
--- 创建固定标签表
-CREATE TABLE IF NOT EXISTS fixed_tags (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL UNIQUE,
-    description TEXT,
-    is_fixed TINYINT(1) NOT NULL DEFAULT 1,
-    status INT DEFAULT 1,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    sort_order INT NOT NULL
-);
-
--- 创建标签表
-CREATE TABLE IF NOT EXISTS tags (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL UNIQUE,
-    description TEXT,
-    status INT DEFAULT 1,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);
-
--- 创建文件标签关联表
-CREATE TABLE IF NOT EXISTS file_tags (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    file_id INT NOT NULL,
-    tag_id INT NOT NULL,
-    FOREIGN KEY (file_id) REFERENCES files(id),
-    FOREIGN KEY (tag_id) REFERENCES tags(id)
-);
-
--- 创建审核记录表
-CREATE TABLE IF NOT EXISTS audit_records (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    file_id INT NOT NULL,
-    user_id INT NOT NULL,
-    old_status INT NOT NULL,
-    new_status INT NOT NULL,
-    operation_type INT NOT NULL,
-    remark TEXT,
-    operation_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (file_id) REFERENCES files(id),
-    FOREIGN KEY (user_id) REFERENCES users(id)
-);
-
--- 创建用户操作日志表
-CREATE TABLE IF NOT EXISTS user_operation_logs (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL,
-    target_user_id INT NOT NULL,
-    operation_type INT NOT NULL,
-    old_status INT NOT NULL,
-    new_status INT NOT NULL,
-    remark TEXT,
-    operation_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(id),
-    FOREIGN KEY (target_user_id) REFERENCES users(id)
-);
-```
-
-5. **启动项目**
+4. **启动项目**
 
 ```bash
 npm run dev
