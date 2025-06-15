@@ -1,3 +1,5 @@
 node_modules
 filetree.txt
 public
+logs
+logs/app.log
