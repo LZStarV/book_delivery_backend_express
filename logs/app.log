@@ -1,0 +1,5 @@
+[2025-06-16T03:30:54.602] [INFO] default - Request: GET /api-docs
+[2025-06-16T03:32:35.184] [INFO] default - Request: GET /api-docs
+[2025-06-16T03:32:35.664] [INFO] default - Request: GET /favicon.ico
+[2025-06-16T03:34:56.540] [INFO] default - Request: GET /swagger/
+[2025-06-16T03:35:01.119] [INFO] default - Request: GET /api-doc
