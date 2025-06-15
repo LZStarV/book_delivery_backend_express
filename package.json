@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon server.js",
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "treer": "treer -e filetree.txt -i \"/node_modules|\\.git|\\.idea|\\.editorconfig|visitor/\""
   },
