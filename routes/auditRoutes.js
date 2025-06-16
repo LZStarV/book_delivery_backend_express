@@ -13,7 +13,7 @@ const { protect, authorize } = require('../middleware/auth');
 
 /**
  * @swagger
- * /api/v1/audits/hall:
+ * /api/v1/audit/hall:
  *   get:
  *     tags:
  *       - 审核
@@ -46,7 +46,7 @@ router.get('/hall', protect, authorize(2), getAuditHall);
 
 /**
  * @swagger
- * /api/v1/audits/approve/{fileId}:
+ * /api/v1/audit/approve/{fileId}:
  *   put:
  *     tags:
  *       - 审核
@@ -84,7 +84,7 @@ router.put('/approve/:fileId', protect, authorize(2), approveFile);
 
 /**
  * @swagger
- * /api/v1/audits/reject/{fileId}:
+ * /api/v1/audit/reject/{fileId}:
  *   put:
  *     tags:
  *       - 审核
@@ -122,7 +122,7 @@ router.put('/reject/:fileId', protect, authorize(2), rejectFile);
 
 /**
  * @swagger
- * /api/v1/audits/ban/{fileId}:
+ * /api/v1/audit/ban/{fileId}:
  *   put:
  *     tags:
  *       - 审核
@@ -160,7 +160,7 @@ router.put('/ban/:fileId', protect, authorize(3), banFile);
 
 /**
  * @swagger
- * /api/v1/audits/unban/{fileId}:
+ * /api/v1/audit/unban/{fileId}:
  *   put:
  *     tags:
  *       - 审核
@@ -198,7 +198,7 @@ router.put('/unban/:fileId', protect, authorize(3), unbanFile);
 
 /**
  * @swagger
- * /api/v1/audits/records:
+ * /api/v1/audit/records:
  *   get:
  *     tags:
  *       - 审核
@@ -231,7 +231,7 @@ router.get('/records', protect, authorize(2, 3), getAuditRecords);
 
 /**
  * @swagger
- * /api/v1/audits/records/file/{fileId}:
+ * /api/v1/audit/records/file/{fileId}:
  *   get:
  *     tags:
  *       - 审核
