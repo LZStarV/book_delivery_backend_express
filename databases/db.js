@@ -59,9 +59,23 @@ async function paginateQuery(sql, values = [], page = 1, limit = 10) {
     };
 }
 
+/**
+ * 执行普通查询（兼容旧的 query 方法）
+ */
+function query(sql, values = [], callback) {
+    pool.query(sql, values, (error, results) => {
+        if (error) {
+            callback(error, null);
+            return;
+        }
+        callback(null, results);
+    });
+}
+
 module.exports = {
     executeQuery,
     executeTransaction,
     paginateQuery,
-    getConnection: () => pool.getConnection()
+    getConnection: () => pool.getConnection(),
+    query
 };

@@ -58,7 +58,7 @@ class File {
      * 创建新文件
      */
     static async create(data) {
-        const fileId = await db.createFile(data);
+        const fileId = await fileDB.createFile(data);
         return new File({ id: fileId, ...data });
     }
 
@@ -66,7 +66,7 @@ class File {
      * 根据ID获取文件
      */
     static async getById(fileId) {
-        const fileData = await db.getFileById(fileId);
+        const fileData = await fileDB.getFileById(fileId);
         if (!fileData) return null;
         return new File(fileData);
     }
@@ -75,7 +75,7 @@ class File {
      * 获取用户上传的文件
      */
     static async getByUserId(userId, page = 1, limit = 10) {
-        const filesData = await db.getFilesByUserId(userId, page, limit);
+        const filesData = await fileDB.getFilesByUserId(userId, page, limit);
         return filesData.map(data => new File(data));
     }
 
@@ -83,7 +83,7 @@ class File {
      * 获取待审核文件列表
      */
     static async getPendingFiles(page = 1, limit = 10) {
-        const filesData = await db.getPendingFiles(page, limit);
+        const filesData = await fileDB.getPendingFiles(page, limit);
         return filesData.map(data => new File(data));
     }
 

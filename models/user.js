@@ -1,5 +1,6 @@
 // models/user.js
 const db = require('../databases/userDB');
+const userDB = require('../databases/userDB');
 const fileDB = require('../databases/fileDB');
 const auditDB = require('../databases/auditDB');
 const bcrypt = require('bcryptjs');
@@ -64,6 +65,14 @@ class User {
     }
 
     /**
+     * 根据用户名获取用户
+     */
+    static async getByUsername(username) {
+        const userData = await db.getUserByUsername(username);
+        return userData ? new User(userData) : null;
+    }
+
+    /**
      * 创建新用户
      */
     static async create(data) {
@@ -79,7 +88,7 @@ class User {
             updated_at: new Date()
         };
 
-        const userId = await db.createUser(userData);
+        const userId = await userDB.createUser(userData);
         return new User({ id: userId, ...userData });
     }
 

@@ -17,6 +17,22 @@ exports.getUserById = (id) => {
 };
 
 /**
+ * 根据用户名获取用户
+ */
+exports.getUserByUsername = (username) => {
+    return new Promise((resolve, reject) => {
+        const query = 'SELECT * FROM users WHERE username = ? LIMIT 1';
+        db.query(query, [username], (error, results) => {
+            if (error) {
+                reject(error);
+                return;
+            }
+            resolve(results[0] || null);
+        });
+    });
+};
+
+/**
  * 根据邮箱获取用户
  */
 exports.getUserByEmail = (email) => {
@@ -163,4 +179,20 @@ exports.getTodayRegisterCount = () => {
 exports.getTagCount = () => {
     const sql = 'SELECT COUNT(*) as count FROM fixed_tags';
     return db.executeQuery(sql).then(rows => rows[0].count);
+};
+
+/**
+ * 创建新用户
+ */
+exports.createUser = (user) => {
+    return new Promise((resolve, reject) => {
+        const query = 'INSERT INTO users SET ?';
+        db.query(query, user, (error, results) => {
+            if (error) {
+                reject(error);
+                return;
+            }
+            resolve(results.insertId);
+        });
+    });
 };
