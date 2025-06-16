@@ -28,7 +28,15 @@ const { protect, authorize } = require('../middleware/auth');
  *               properties:
  *                 success: { type: boolean }
  *                 count: { type: integer }
- *                 data: { type: array, items: { type: object } }
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       id: { type: integer }
+ *                       name: { type: string }
+ *                       description: { type: string }
+ *                       status: { type: integer }
  */
 router.get('/', getAllTags);
 
@@ -55,7 +63,14 @@ router.get('/', getAllTags);
  *               type: object
  *               properties:
  *                 success: { type: boolean }
- *                 data: { type: object }
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     id: { type: integer }
+ *                     name: { type: string }
+ *                     description: { type: string }
+ *                     status: { type: integer }
+ *                     fileCount: { type: integer }
  *       404:
  *         description: "标签不存在"
  */

@@ -28,7 +28,17 @@ const { protect, authorize } = require('../middleware/auth');
  *               properties:
  *                 success: { type: boolean }
  *                 count: { type: integer }
- *                 data: { type: array, items: { type: object } }
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       id: { type: integer }
+ *                       name: { type: string }
+ *                       description: { type: string }
+ *                       parentId: { type: integer }
+ *                       sortOrder: { type: integer }
+ *                       status: { type: integer }
  */
 router.get('/', getAllCategories);
 
@@ -55,7 +65,15 @@ router.get('/', getAllCategories);
  *               type: object
  *               properties:
  *                 success: { type: boolean }
- *                 data: { type: object }
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     id: { type: integer }
+ *                     name: { type: string }
+ *                     description: { type: string }
+ *                     parentId: { type: integer }
+ *                     sortOrder: { type: integer }
+ *                     status: { type: integer }
  *       404:
  *         description: "分类不存在"
  */
@@ -162,6 +180,13 @@ router.put('/:id', protect, authorize(2, 3), updateCategory);
  *     responses:
  *       200:
  *         description: "删除成功"
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success: { type: boolean }
+ *                 message: { type: string }
  *       400:
  *         description: "分类下存在子分类或文件"
  *       404:

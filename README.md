@@ -4,8 +4,6 @@
 
 本项目是一个基于 `Node.js` 和 `Express` 框架构建的文件管理系统，支持用户上传、浏览、审核和管理文件。系统提供了用户认证、文件分类、标签管理、审核记录等功能，同时具备权限控制，确保不同角色的用户（普通用户、志愿者、管理员）拥有不同的操作权限。
 
-***
-
 ## 二、项目结构
 
 ```
@@ -63,8 +61,6 @@ book_delivery_backend_express
 |   └constants.js
 ```
 
-***
-
 ## 三、环境要求
 
 ### 必要开发工具
@@ -119,7 +115,7 @@ book_delivery_backend_express
        npm -v
        ```
 
-- **使用官方安装包**
+* **使用官方安装包**
 
   1. 访问 [Node.js 官方下载页面](https://nodejs.org/en/download/)。
 
@@ -233,8 +229,6 @@ book_delivery_backend_express
      sudo systemctl status mysql
      ```
 
-***
-
 ## 四、安装与启动
 
 1. **克隆项目**
@@ -254,19 +248,15 @@ npm i
 
    不需要我们再次创建，数据库已经部署上服务器了。
 
-
-
 4. **启动项目**
 
 ```bash
 npm run dev
 ```
 
-***
-
 ## 五、API 文档
 
-项目使用 Swagger 生成 API 文档，启动项目后，访问 `http://localhost:3000/api-docs` 即可查看详细的 API 接口信息。
+项目使用 Swagger 生成 API 文档，启动项目后，访问 `http://localhost:8080/api-docs` 即可查看详细的 API 接口信息。
 
 ### 1. 用户认证
 
@@ -328,8 +318,6 @@ npm run dev
 
 * **获取文件审核记录**：`GET /api/v1/audits/records/file/:fileId`
 
-***
-
 ## 六、注意事项
 
 * 请确保数据库服务正常运行。
@@ -337,8 +325,6 @@ npm run dev
 * 项目使用 `bcrypt` 对用户密码进行加密，确保用户信息安全。
 
 * 上传的文件会存储在 `public/uploads/files` 目录下，封面图片会存储在 `public/uploads/covers` 目录下。
-
-***
 
 ## 七、贡献
 

@@ -22,7 +22,7 @@ exports.getSystemOverview = async (req, res) => {
             userDB.getUserCount(),
             fileDB.getFileCount(),
             categoryDB.getCategoryCount(),
-            fileDB.getTagCount(), // 修正为fileDB（假设统计文件标签）
+            fileDB.getTagCount(),
             fileDB.getTodayUploadCount(),
             userDB.getTodayRegisterCount()
         ]);

@@ -10,6 +10,7 @@ const { protect } = require('../middleware/auth');
  *     tags:
  *       - 认证
  *     summary: 用户注册
+ *     description: "注册新用户，返回用户信息和Token。"
  *     requestBody:
  *       required: true
  *       content:
@@ -35,6 +36,22 @@ const { protect } = require('../middleware/auth');
  *     responses:
  *       201:
  *         description: "注册成功，返回用户信息和Token"
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success: { type: boolean }
+ *                 token: { type: string }
+ *                 user:
+ *                   type: object
+ *                   properties:
+ *                     id: { type: integer }
+ *                     username: { type: string }
+ *                     email: { type: string }
+ *                     realName: { type: string }
+ *                     phone: { type: string }
+ *                     userType: { type: integer }
  *       400:
  *         description: "缺少必填字段或用户已存在"
  */
@@ -47,6 +64,7 @@ router.post('/register', register);
  *     tags:
  *       - 认证
  *     summary: 用户登录
+ *     description: "用户登录，返回用户信息和Token。"
  *     requestBody:
  *       required: true
  *       content:
@@ -63,8 +81,28 @@ router.post('/register', register);
  *     responses:
  *       200:
  *         description: "登录成功，返回用户信息和Token"
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success: { type: boolean }
+ *                 token: { type: string }
+ *                 user:
+ *                   type: object
+ *                   properties:
+ *                     id: { type: integer }
+ *                     username: { type: string }
+ *                     email: { type: string }
+ *                     realName: { type: string }
+ *                     phone: { type: string }
+ *                     userType: { type: integer }
+ *                     avatar: { type: string }
+ *                     status: { type: integer }
  *       401:
  *         description: "认证失败"
+ *       403:
+ *         description: "账号已被封禁"
  */
 router.post('/login', login);
 
@@ -75,11 +113,19 @@ router.post('/login', login);
  *     tags:
  *       - 认证
  *     summary: 用户登出
+ *     description: "用户登出，清除客户端Token。"
  *     security:
  *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: "登出成功"
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success: { type: boolean }
+ *                 message: { type: string }
  */
 router.post('/logout', protect, logout);
 
@@ -90,13 +136,33 @@ router.post('/logout', protect, logout);
  *     tags:
  *       - 认证
  *     summary: 获取当前用户信息
+ *     description: "获取当前登录用户的详细信息。"
  *     security:
  *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: "成功返回当前用户信息"
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success: { type: boolean }
+ *                 user:
+ *                   type: object
+ *                   properties:
+ *                     id: { type: integer }
+ *                     username: { type: string }
+ *                     email: { type: string }
+ *                     realName: { type: string }
+ *                     phone: { type: string }
+ *                     userType: { type: integer }
+ *                     avatar: { type: string }
+ *                     status: { type: integer }
  *       401:
  *         description: "未授权"
+ *       404:
+ *         description: "用户不存在"
  */
 router.get('/me', protect, getMe);
 

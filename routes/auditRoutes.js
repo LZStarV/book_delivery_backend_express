@@ -40,7 +40,19 @@ const { protect, authorize } = require('../middleware/auth');
  *               properties:
  *                 success: { type: boolean }
  *                 count: { type: integer }
- *                 data: { type: array, items: { type: object } }
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       _id: { type: string, description: "文件ID" }
+ *                       fileName: { type: string, description: "文件名称" }
+ *                       filePath: { type: string, description: "文件路径" }
+ *                       fileSize: { type: integer, description: "文件大小 (字节)" }
+ *                       fileType: { type: string, description: "文件类型" }
+ *                       status: { type: integer, description: "审核状态：0-待审核，1-审核通过，2-审核拒绝" }
+ *                       createdAt: { type: string, format: "date-time", description: "创建时间" }
+ *                       updatedAt: { type: string, format: "date-time", description: "更新时间" }
  */
 router.get('/hall', protect, authorize(2), getAuditHall);
 
@@ -78,7 +90,17 @@ router.get('/hall', protect, authorize(2), getAuditHall);
  *               properties:
  *                 success: { type: boolean }
  *                 message: { type: string }
- *                 data: { type: object }
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     _id: { type: string, description: "文件ID" }
+ *                     fileName: { type: string, description: "文件名称" }
+ *                     filePath: { type: string, description: "文件路径" }
+ *                     fileSize: { type: integer, description: "文件大小 (字节)" }
+ *                     fileType: { type: string, description: "文件类型" }
+ *                     status: { type: integer, description: "审核状态：0-待审核，1-审核通过，2-审核拒绝" }
+ *                     createdAt: { type: string, format: "date-time", description: "创建时间" }
+ *                     updatedAt: { type: string, format: "date-time", description: "更新时间" }
  */
 router.put('/approve/:fileId', protect, authorize(2), approveFile);
 
@@ -116,7 +138,17 @@ router.put('/approve/:fileId', protect, authorize(2), approveFile);
  *               properties:
  *                 success: { type: boolean }
  *                 message: { type: string }
- *                 data: { type: object }
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     _id: { type: string, description: "文件ID" }
+ *                     fileName: { type: string, description: "文件名称" }
+ *                     filePath: { type: string, description: "文件路径" }
+ *                     fileSize: { type: integer, description: "文件大小 (字节)" }
+ *                     fileType: { type: string, description: "文件类型" }
+ *                     status: { type: integer, description: "审核状态：0-待审核，1-审核通过，2-审核拒绝" }
+ *                     createdAt: { type: string, format: "date-time", description: "创建时间" }
+ *                     updatedAt: { type: string, format: "date-time", description: "更新时间" }
  */
 router.put('/reject/:fileId', protect, authorize(2), rejectFile);
 
@@ -154,7 +186,17 @@ router.put('/reject/:fileId', protect, authorize(2), rejectFile);
  *               properties:
  *                 success: { type: boolean }
  *                 message: { type: string }
- *                 data: { type: object }
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     _id: { type: string, description: "文件ID" }
+ *                     fileName: { type: string, description: "文件名称" }
+ *                     filePath: { type: string, description: "文件路径" }
+ *                     fileSize: { type: integer, description: "文件大小 (字节)" }
+ *                     fileType: { type: string, description: "文件类型" }
+ *                     status: { type: integer, description: "审核状态：0-待审核，1-审核通过，2-审核拒绝" }
+ *                     createdAt: { type: string, format: "date-time", description: "创建时间" }
+ *                     updatedAt: { type: string, format: "date-time", description: "更新时间" }
  */
 router.put('/ban/:fileId', protect, authorize(3), banFile);
 
@@ -192,7 +234,17 @@ router.put('/ban/:fileId', protect, authorize(3), banFile);
  *               properties:
  *                 success: { type: boolean }
  *                 message: { type: string }
- *                 data: { type: object }
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     _id: { type: string, description: "文件ID" }
+ *                     fileName: { type: string, description: "文件名称" }
+ *                     filePath: { type: string, description: "文件路径" }
+ *                     fileSize: { type: integer, description: "文件大小 (字节)" }
+ *                     fileType: { type: string, description: "文件类型" }
+ *                     status: { type: integer, description: "审核状态：0-待审核，1-审核通过，2-审核拒绝" }
+ *                     createdAt: { type: string, format: "date-time", description: "创建时间" }
+ *                     updatedAt: { type: string, format: "date-time", description: "更新时间" }
  */
 router.put('/unban/:fileId', protect, authorize(3), unbanFile);
 
@@ -225,7 +277,19 @@ router.put('/unban/:fileId', protect, authorize(3), unbanFile);
  *               properties:
  *                 success: { type: boolean }
  *                 count: { type: integer }
- *                 data: { type: array, items: { type: object } }
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       _id: { type: string, description: "记录ID" }
+ *                       fileId: { type: string, description: "文件ID" }
+ *                       fileName: { type: string, description: "文件名称" }
+ *                       action: { type: string, description: "操作类型：approve/reject/ban/unban" }
+ *                       remark: { type: string, description: "审核备注" }
+ *                       status: { type: integer, description: "审核状态：0-待审核，1-审核通过，2-审核拒绝" }
+ *                       createdAt: { type: string, format: "date-time", description: "创建时间" }
+ *                       updatedAt: { type: string, format: "date-time", description: "更新时间" }
  */
 router.get('/records', protect, authorize(2, 3), getAuditRecords);
 
@@ -255,7 +319,19 @@ router.get('/records', protect, authorize(2, 3), getAuditRecords);
  *               properties:
  *                 success: { type: boolean }
  *                 count: { type: integer }
- *                 data: { type: array, items: { type: object } }
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       _id: { type: string, description: "记录ID" }
+ *                       fileId: { type: string, description: "文件ID" }
+ *                       fileName: { type: string, description: "文件名称" }
+ *                       action: { type: string, description: "操作类型：approve/reject/ban/unban" }
+ *                       remark: { type: string, description: "审核备注" }
+ *                       status: { type: integer, description: "审核状态：0-待审核，1-审核通过，2-审核拒绝" }
+ *                       createdAt: { type: string, format: "date-time", description: "创建时间" }
+ *                       updatedAt: { type: string, format: "date-time", description: "更新时间" }
  */
 router.get('/records/file/:fileId', protect, authorize(2, 3), getAuditRecordsByFile);
 

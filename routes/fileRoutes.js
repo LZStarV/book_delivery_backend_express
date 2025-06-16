@@ -20,6 +20,7 @@ const { protect, authorize } = require('../middleware/auth');
  *     tags:
  *       - 文件
  *     summary: 浏览文件 (公共)
+ *     description: "支持按分类、标签、排序、分页浏览文件。"
  *     parameters:
  *       - name: categoryId
  *         in: query
@@ -45,6 +46,16 @@ const { protect, authorize } = require('../middleware/auth');
  *     responses:
  *       200:
  *         description: "成功返回文件列表"
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success: { type: boolean }
+ *                 count: { type: integer }
+ *                 total: { type: integer }
+ *                 pages: { type: integer }
+ *                 data: { type: array, items: { type: object } }
  */
 router.get('/', browseFiles);
 
@@ -55,6 +66,7 @@ router.get('/', browseFiles);
  *     tags:
  *       - 文件
  *     summary: 获取广场文件 (审核通过的公开文件)
+ *     description: "获取所有审核通过的公开文件，支持分页、分类、标签、排序。"
  *     parameters:
  *       - name: categoryId
  *         in: query
@@ -80,6 +92,16 @@ router.get('/', browseFiles);
  *     responses:
  *       200:
  *         description: "成功返回广场文件列表"
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success: { type: boolean }
+ *                 count: { type: integer }
+ *                 total: { type: integer }
+ *                 pages: { type: integer }
+ *                 data: { type: array, items: { type: object } }
  */
 router.get('/square', browseFiles);
 
@@ -90,6 +112,7 @@ router.get('/square', browseFiles);
  *     tags:
  *       - 文件
  *     summary: 按分类浏览文件 (公共)
+ *     description: "根据分类ID浏览文件，支持标签、分页、排序。"
  *     parameters:
  *       - name: categoryId
  *         in: path
@@ -115,6 +138,16 @@ router.get('/square', browseFiles);
  *     responses:
  *       200:
  *         description: "成功返回分类下的文件列表"
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success: { type: boolean }
+ *                 count: { type: integer }
+ *                 total: { type: integer }
+ *                 pages: { type: integer }
+ *                 data: { type: array, items: { type: object } }
  *       404:
  *         description: "分类不存在"
  */
@@ -127,6 +160,7 @@ router.get('/category/:categoryId', browseFiles);
  *     tags:
  *       - 文件
  *     summary: 按标签浏览文件 (公共)
+ *     description: "根据标签浏览文件，支持分类、分页、排序。"
  *     parameters:
  *       - name: tag
  *         in: path
@@ -152,6 +186,16 @@ router.get('/category/:categoryId', browseFiles);
  *     responses:
  *       200:
  *         description: "成功返回标签相关的文件列表"
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success: { type: boolean }
+ *                 count: { type: integer }
+ *                 total: { type: integer }
+ *                 pages: { type: integer }
+ *                 data: { type: array, items: { type: object } }
  */
 router.get('/tag/:tag', browseFiles);
 
@@ -162,6 +206,7 @@ router.get('/tag/:tag', browseFiles);
  *     tags:
  *       - 文件
  *     summary: 获取文件详情 (公共)
+ *     description: "根据文件ID获取文件详细信息。"
  *     parameters:
  *       - name: id
  *         in: path
@@ -170,6 +215,13 @@ router.get('/tag/:tag', browseFiles);
  *     responses:
  *       200:
  *         description: "成功返回文件详情"
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success: { type: boolean }
+ *                 data: { type: object }
  *       404:
  *         description: "文件不存在或不可访问"
  */
