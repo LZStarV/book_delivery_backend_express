@@ -3,6 +3,7 @@ const db = require('../databases/fileDB');
 const auditDB = require('../databases/auditDB');
 const categoryDB = require('../databases/categoryDB');
 const tagDB = require('../databases/tagDB');
+const fileDB = require('../databases/fileDB');
 const fs = require('fs');
 const path = require('path');
 

@@ -38,15 +38,11 @@ exports.register = async (req, res) => {
             });
         }
 
-        // 加密密码
-        const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(password, salt);
-
         // 创建用户
         const newUser = await User.create({
             username,
             email,
-            password: hashedPassword,
+            password,
             real_name: realName,
             phone,
             user_type: 1, // 默认普通用户
@@ -118,9 +114,10 @@ exports.login = async (req, res) => {
         if (!isPasswordValid) {
             return res.status(401).json({
                 success: false,
-                message: '用户不存在或密码错误'
+                message: '密码错误'
             });
         }
+
 
         // 更新最后登录时间
         await user.update({ last_login_time: new Date() });
